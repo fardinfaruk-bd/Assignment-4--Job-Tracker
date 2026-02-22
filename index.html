@@ -48,7 +48,7 @@
     <main class="w-[80%] mx-auto">
         <div class="flex justify-between mb-6">
             <h1 class="text-2xl font-bold text-[#002C5C]">Available Jobs</h1>
-            <p class="text-[#64748B]"><span>0</span> jobs</p>
+            <p class="text-[#64748B]"><span class="totalJob">0</span> jobs</p>
         </div>
 
         <div class="flex gap-2">
@@ -57,6 +57,19 @@
             <button onclick="toggle('rejected-filter-btn')" class="text-[#64748B] text-[12px] font-semibold bg-white border border-gray-300 px-8 py-2.5 rounded-lg" id="rejected-filter-btn">Rejected</button>
         </div>
 
+        <section id="filtered-section" class="hidden">
+            
+
+        </section>
+
+        <section id="no-jobs-section" class="hidden">
+            <div class="border border-gray-200 rounded-lg py-20 mt-5 bg-white flex flex-col items-center gap-4 ">
+                <img src="./Images/jobs.png" alt="">
+                <p class="text-2xl font-semibold text-[#002C5C]">No jobs available</p>
+                <p class="text-[#64748B]">Check back soon for new job opportunities</p>
+            </div>
+        </section>
+
 
         <section id="all-job-list">
             <!-- Job List Cards -->
@@ -64,7 +77,7 @@
                 <div class="space-y-5">
                     <div>
                         <p class="companyName text-[#002C5C] font-bold text-2xl">Mobile First Corp</p>
-                        <p class="jobtitle text-[#64748B]">React Native Developer</p>
+                        <p class="jobTitle text-[#64748B]">React Native Developer</p>
                     </div>
 
                     <div>
@@ -89,7 +102,7 @@
                 <div class="space-y-5">
                     <div>
                         <p class="companyName text-[#002C5C] font-bold text-2xl">WebFlow Agency</p>
-                        <p class="jobtitle text-[#64748B]">Web Designer & Developer</p>
+                        <p class="jobTitle text-[#64748B]">Web Designer & Developer</p>
                     </div>
 
                     <div>
@@ -114,7 +127,7 @@
                 <div class="space-y-5">
                     <div>
                         <p class="companyName text-[#002C5C] font-bold text-2xl">DataViz Solutions</p>
-                        <p class="jobtitle text-[#64748B]">Data Visualization Specialist</p>
+                        <p class="jobTitle text-[#64748B]">Data Visualization Specialist</p>
                     </div>
 
                     <div>
@@ -139,7 +152,7 @@
                 <div class="space-y-5">
                     <div>
                         <p class="companyName text-[#002C5C] font-bold text-2xl">CloudFirst Inc</p>
-                        <p class="jobtitle text-[#64748B]">Backend Developer</p>
+                        <p class="jobTitle text-[#64748B]">Backend Developer</p>
                     </div>
 
                     <div>
@@ -164,7 +177,7 @@
                 <div class="space-y-5">
                     <div>
                         <p class="companyName text-[#002C5C] font-bold text-2xl">Innovation Labs</p>
-                        <p class="jobtitle text-[#64748B]">UI/UX Engineer</p>
+                        <p class="jobTitle text-[#64748B]">UI/UX Engineer</p>
                     </div>
 
                     <div>
@@ -189,7 +202,7 @@
                 <div class="space-y-5">
                     <div>
                         <p class="companyName text-[#002C5C] font-bold text-2xl">MegaCorp Solutions</p>
-                        <p class="jobtitle text-[#64748B]">JavaScript Developer</p>
+                        <p class="jobTitle text-[#64748B]">JavaScript Developer</p>
                     </div>
 
                     <div>
@@ -214,7 +227,7 @@
                 <div class="space-y-5">
                     <div>
                         <p class="companyName text-[#002C5C] font-bold text-2xl">StartupXYZ</p>
-                        <p class="jobtitle text-[#64748B]">Full Stack Engineer</p>
+                        <p class="jobTitle text-[#64748B]">Full Stack Engineer</p>
                     </div>
 
                     <div>
@@ -240,7 +253,7 @@
                 <div class="space-y-5">
                     <div>
                         <p class="companyName text-[#002C5C] font-bold text-2xl">TechCorp Industries</p>
-                        <p class="jobtitle text-[#64748B]">Senior Frontend Developer</p>
+                        <p class="jobTitle text-[#64748B]">Senior Frontend Developer</p>
                     </div>
 
                     <div>
