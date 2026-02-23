@@ -86,7 +86,6 @@ function toggle(id) {
         allJobs.classList.add("hidden");
         filteredSection.classList.remove("hidden");
         renderRejectedList();
-        
     }
     noJobs();
     updateCounts();
@@ -117,7 +116,7 @@ mainContainer.addEventListener("click", function (event) {
             interviewList.push(jobData);  
         }
 
-        if(jobStatus == "rejected-filter-btn") {
+        if(jobStatus == "rejected") {
             renderRejectedList();
         }
 
@@ -127,9 +126,8 @@ mainContainer.addEventListener("click", function (event) {
         noJobs();
         updateCounts();
     }
-
-
-    else if(event.target.classList.contains("rejected-btn")) {
+    
+     else if(event.target.classList.contains("rejected-btn")) {
         const parentNode = event.target.parentNode.parentNode;
         const companyName = parentNode.querySelector(".companyName").innerText;
         const jobTitle = parentNode.querySelector(".jobTitle").innerText;
@@ -150,19 +148,18 @@ mainContainer.addEventListener("click", function (event) {
 
         if(!jobExist) {
             rejectedList.push(jobData);
-            
-
+        }
+        
+        if(jobStatus == "interview") {
+            renderInterviewList();
         }
 
         interviewList = interviewList.filter(item => item.companyName !== jobData.companyName);
 
-        if(jobStatus == "interview-filter-btn") {
-            renderInterviewList();
-        }
         noJobs();
         updateCounts();
-        
     }
+
     else if(event.target.closest(".delete-btn")) {
 
     const parentNode = event.target.closest(".jobCard");
