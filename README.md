@@ -1,4 +1,4 @@
-<h1>Hello, I'm Fardin </h1>
+<h1>Hello, I'm Fardin Faruk</h1>
 <p>I have completed my Diploma in Engineering, finishing my 8th semester, with a degree in Computer Science and Technology. In the future, I aspire to become a skilled and successful Web Developer.</p>
 <br>
 <br>
