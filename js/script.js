@@ -14,32 +14,26 @@ const mainContainer = document.querySelector('main')
 
 
 const filteredSection = document.getElementById("filtered-section")
-
 const allFilterBtn = document.getElementById("all-filter-btn")
 const interviewFilterBtn = document.getElementById("interview-filter-btn")
 const rejectedFilterBtn = document.getElementById("rejected-filter-btn")
 
 
 function updateCounts() {
-    total.innerText = allJobs.children.length;
+    if (jobStatus === "all") {
     totalJob.innerText = allJobs.children.length;
+    } 
+    else if (jobStatus === "interview") {
+        totalJob.innerText = interviewList.length;
+    } 
+    else if (jobStatus === "rejected") {
+        totalJob.innerText = rejectedList.length;
+    }
+
+    total.innerText = allJobs.children.length;
     interviewCount.innerText = interviewList.length;
     rejectedCount.innerText = rejectedList.length;
-
-    const noJobsSection = document.getElementById("no-jobs-section");
-    
-    if (
-        (jobStatus === "all" && allJobs.children.length === 0) ||
-        (jobStatus === "interview" && interviewList.length === 0) ||
-        (jobStatus === "rejected" && rejectedList.length === 0)
-    ) {
-        noJobsSection.classList.remove("hidden");
-    } else {
-        noJobsSection.classList.add("hidden");
-    }
 }
-
-
 updateCounts();
 
 
@@ -47,18 +41,16 @@ updateCounts();
 function noJobs(){
     const noJobsSection = document.getElementById("no-jobs-section");
 
-    if(jobStatus == "all-filter-btn" && allJobs.children.length === 0) {
-        noJobsSection.classList.remove("hidden");
-    }
-    else if(jobStatus == "interview-filter-btn" && interviewList.length === 0) {
-        noJobsSection.classList.remove("hidden");
-    }
-    else if(jobStatus == "rejected-filter-btn" && rejectedList.length === 0) {
-        noJobsSection.classList.remove("hidden");
-    }
-    else {
-        noJobsSection.classList.add("hidden");
-    }
+  if (
+    (jobStatus === "all" && allJobs.children.length === 0) ||
+    (jobStatus === "interview" && interviewList.length === 0) ||
+    (jobStatus === "rejected" && rejectedList.length === 0)
+  ) {
+    noJobsSection.classList.remove("hidden");
+  } 
+  else {
+    noJobsSection.classList.add("hidden");
+  }
 }
 
 function toggle(id) {
@@ -79,21 +71,25 @@ function toggle(id) {
 
 
     if(id == "interview-filter-btn") {
+        jobStatus = "interview";
         allJobs.classList.add("hidden");
         filteredSection.classList.remove("hidden");
         renderInterviewList();
         
     }else if(id == "all-filter-btn") {
+        jobStatus = "all";
         allJobs.classList.remove("hidden");
         filteredSection.classList.add("hidden");
         
     }else if(id == "rejected-filter-btn") {
+        jobStatus = "rejected";
         allJobs.classList.add("hidden");
         filteredSection.classList.remove("hidden");
         renderRejectedList();
         
     }
     noJobs();
+    updateCounts();
 }
 
 mainContainer.addEventListener("click", function (event) {
@@ -121,11 +117,13 @@ mainContainer.addEventListener("click", function (event) {
             interviewList.push(jobData);  
         }
 
-        rejectedList = rejectedList.filter(item => item.companyName !== jobData.companyName);
-
         if(jobStatus == "rejected-filter-btn") {
             renderRejectedList();
         }
+
+        rejectedList = rejectedList.filter(item => item.companyName !== jobData.companyName);
+
+        
         noJobs();
         updateCounts();
     }
@@ -170,7 +168,7 @@ mainContainer.addEventListener("click", function (event) {
     const parentNode = event.target.closest(".jobCard");
 
     const companyName = parentNode.querySelector(".companyName").innerText;
-    
+
     parentNode.remove();
 
     interviewList = interviewList.filter(item => item.companyName !== companyName);
@@ -187,6 +185,7 @@ mainContainer.addEventListener("click", function (event) {
 
 function renderInterviewList() {
     filteredSection.innerHTML = "";
+
     for (let job of interviewList) {
 
         let div = document.createElement("div");
@@ -223,9 +222,8 @@ function renderInterviewList() {
 function renderRejectedList() {
 
     filteredSection.innerHTML = "";
-    for (let job of rejectedList) {
-        
 
+    for (let job of rejectedList) {
         let div = document.createElement("div");
         div.className = "jobCard flex justify-between border border-gray-200 rounded-lg p-6 mt-5 bg-white"
         div.innerHTML = `<div class="space-y-5">
