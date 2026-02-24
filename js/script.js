@@ -1,3 +1,4 @@
+
 let interviewList = [];
 let rejectedList = [];
 let jobStatus = "all";
@@ -19,6 +20,7 @@ const interviewFilterBtn = document.getElementById("interview-filter-btn")
 const rejectedFilterBtn = document.getElementById("rejected-filter-btn")
 
 
+// Update Count function
 function updateCounts() {
     if (jobStatus === "all") {
     totalJob.innerText = allJobs.children.length;
@@ -37,7 +39,7 @@ function updateCounts() {
 updateCounts();
 
 
-
+// No Job Section Show/hide Function
 function noJobs(){
     const noJobsSection = document.getElementById("no-jobs-section");
 
@@ -53,6 +55,7 @@ function noJobs(){
   }
 }
 
+//Toggle Function
 function toggle(id) {
     allFilterBtn.classList.remove("text-white", "bg-[#3B82F6]");
     interviewFilterBtn.classList.remove("text-white", "bg-[#3B82F6]");
@@ -91,8 +94,10 @@ function toggle(id) {
     updateCounts();
 }
 
+// Add event Listener to the Interview and Rejected Btn
 mainContainer.addEventListener("click", function (event) {
     
+    // Interview btn
     if(event.target.classList.contains("interview-btn")) {
         const parentNode = event.target.parentNode.parentNode;
         const companyName = parentNode.querySelector(".companyName").innerText;
@@ -105,7 +110,7 @@ mainContainer.addEventListener("click", function (event) {
         statusElement.classList.remove("rejectedStyle");
         statusElement.classList.add("interviewStyle");
 
-
+        // create interview job data object
         const jobData = {
             companyName,
             jobTitle,
@@ -114,23 +119,25 @@ mainContainer.addEventListener("click", function (event) {
             description
         }
 
+        // card exit check
         const jobExist = interviewList.find(item => item.companyName === jobData.companyName);
-
         if(!jobExist) {
             interviewList.push(jobData);  
         }
 
+        // Rejected list filter
         rejectedList = rejectedList.filter(item => item.companyName !== jobData.companyName);
 
+        // status check
         if(jobStatus === "rejected") {
             renderRejectedList();
         }
 
-        
         noJobs();
         updateCounts();
     }
     
+    //Rejected Btn
      else if(event.target.classList.contains("rejected-btn")) {
         const parentNode = event.target.parentNode.parentNode;
         const companyName = parentNode.querySelector(".companyName").innerText;
@@ -144,7 +151,7 @@ mainContainer.addEventListener("click", function (event) {
         statusElement.classList.add("rejectedStyle");
         
 
-
+        // create rejected job data object
         const jobData = {
             companyName,
             jobTitle,
@@ -152,15 +159,14 @@ mainContainer.addEventListener("click", function (event) {
             status: "REJECTED",
             description
         }
-
+        // card exit check
         const jobExist = rejectedList.find(item => item.companyName === jobData.companyName);
-
         if(!jobExist) {
             rejectedList.push(jobData);
         }
-
+        // inteview list filter
         interviewList = interviewList.filter(item => item.companyName !== jobData.companyName);
-
+        // status check
         if(jobStatus === "interview") {
             renderInterviewList();
         }
@@ -169,6 +175,7 @@ mainContainer.addEventListener("click", function (event) {
         updateCounts();
     }
 
+    // Card delete btn
     else if(event.target.closest(".delete-btn")) {
 
     const parentNode = event.target.closest(".jobCard");
@@ -185,7 +192,7 @@ mainContainer.addEventListener("click", function (event) {
 
 })
 
-
+// create Interview card if card status is interview
 function renderInterviewList() {
     filteredSection.innerHTML = "";
 
@@ -220,7 +227,7 @@ function renderInterviewList() {
 
 }
 
-
+// create rejected card if card status is rejected
 function renderRejectedList() {
 
     filteredSection.innerHTML = "";
